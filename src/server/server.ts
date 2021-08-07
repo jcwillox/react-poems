@@ -1,4 +1,5 @@
 import express, { Express, NextFunction, Request, Response } from "express";
+import poems from "./poems";
 import cors from "cors";
 
 const app: Express = express();
@@ -16,6 +17,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.get("/", (req: Request, res: Response) => {
   res.sendFile("build/index.html");
 });
+
+app.use("/api", poems);
 
 app.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`);
