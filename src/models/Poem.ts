@@ -12,5 +12,4 @@ export interface NewPoemType {
   author: string;
   authorId: number;
   text: string;
-  votes: number;
 }

@@ -18,7 +18,8 @@ export const poemStore = {
     let id = uuid4();
     poemData[id] = {
       ...poem,
-      id: id
+      id: id,
+      votes: 0
     };
   },
   /* removes a poem */
