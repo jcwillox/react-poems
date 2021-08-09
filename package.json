@@ -4,10 +4,10 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "scripts": {
-    "start": "react-scripts start",
-    "start-server": "tsc-watch --noClear -p ./tsconfig.server.json --onSuccess \"node ./build-server/server/server.js\"",
+    "start": "ts-node --project tsconfig.server.json src/server/server.ts",
+    "web-dev": "react-scripts start",
+    "server-dev": "nodemon",
     "build": "react-scripts build",
-    "build-server": "tsc -p tsconfig.server.json && node build-server/server/server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -17,6 +17,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
@@ -32,7 +33,7 @@
     "@types/react": "^17.0.16",
     "@types/react-dom": "^17.0.9",
     "@types/uuid": "^8.3.1",
-    "tsc-watch": "^4.4.0"
+    "nodemon": "^2.0.12"
   },
   "eslintConfig": {
     "extends": [
