@@ -1,19 +1,17 @@
-import express, { Express, NextFunction, Request, Response } from "express";
+import express, { Express, Request, Response } from "express";
 import poems from "./poems";
 import cors from "cors";
+import morgan from "morgan";
 
 const app: Express = express();
 const PORT = process.env.PORT || 5000;
 
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
+
 app.use(express.static("build"));
 app.use(cors());
-
-/* basic logging handler */
-app.use((req: Request, res: Response, next: NextFunction) => {
-  console.log(req.url);
-  next();
-});
-
 app.use("/api", poems);
 
 app.get("*", (req: Request, res: Response) => {
