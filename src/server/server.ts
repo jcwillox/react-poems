@@ -14,11 +14,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.get("/", (req: Request, res: Response) => {
+app.use("/api", poems);
+
+app.get("*", (req: Request, res: Response) => {
   res.sendFile("build/index.html");
 });
-
-app.use("/api", poems);
 
 app.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`);
