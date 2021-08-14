@@ -11,6 +11,8 @@ import {
 } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import Jdenticon from "./Jdenticon";
+import { Link } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,9 +84,17 @@ export default function SearchAppBar() {
             {/* we are assuming that bob is the currently logged in user */}
             <Jdenticon value="Bob Bobalooba" size={36} />
           </div>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Poems
-          </Typography>
+          <Link
+            component={RouterLink}
+            to="/"
+            color="inherit"
+            style={{ textDecoration: "none" }}
+            className={classes.title}
+          >
+            <Typography variant="h6" noWrap>
+              Poems
+            </Typography>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

@@ -7,19 +7,17 @@ import HomeView from "./views/HomeView";
 function App() {
   return (
     <React.Fragment>
-      <SearchAppBar />
       <CssBaseline />
-      <Container maxWidth={"md"}>
-        <Box m={3}>
-          <BrowserRouter>
+      <BrowserRouter>
+        <SearchAppBar />
+        <Container maxWidth="md">
+          <Box m={3}>
             <Switch>
-              <Route exact path="/">
-                <HomeView />
-              </Route>
+              <Route exact path="/" component={HomeView} />
             </Switch>
-          </BrowserRouter>
-        </Box>
-      </Container>
+          </Box>
+        </Container>
+      </BrowserRouter>
     </React.Fragment>
   );
 }
