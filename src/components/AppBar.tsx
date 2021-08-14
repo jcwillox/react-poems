@@ -10,8 +10,7 @@ import {
   Theme
 } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import { AccountCircle } from "@material-ui/icons";
-import { IconButton } from "@material-ui/core";
+import Jdenticon from "./Jdenticon";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,7 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1
     },
     menuButton: {
-      marginRight: theme.spacing(2)
+      display: "inline-flex",
+      marginRight: theme.spacing(2),
+      borderRadius: 4
     },
     title: {
       flexGrow: 1,
@@ -77,17 +78,10 @@ export default function SearchAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={() => alert("clicked")}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
+          <div className={classes.menuButton}>
+            {/* we are assuming that bob is the currently logged in user */}
+            <Jdenticon value="Bob Bobalooba" size={36} />
+          </div>
           <Typography className={classes.title} variant="h6" noWrap>
             Poems
           </Typography>
