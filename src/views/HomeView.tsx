@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Grid } from "@material-ui/core";
 import PoemCard from "../components/PoemCard";
+import PoemCardSkeleton from "../components/PoemCardSkeleton";
+import SkeletonGrid from "../components/SkeletonGrid";
 import { PoemType } from "../models/Poem";
 
 const HomeView = () => {
@@ -25,11 +27,17 @@ const HomeView = () => {
       alignItems="center"
       spacing={3}
     >
-      {poems.map(poem => (
-        <Grid item key={poem.id}>
-          <PoemCard poem={poem} />
-        </Grid>
-      ))}
+      {poems.length ? (
+        poems.map(poem => (
+          <Grid item key={poem.id}>
+            <PoemCard poem={poem} />
+          </Grid>
+        ))
+      ) : (
+        <SkeletonGrid count={4}>
+          <PoemCardSkeleton />
+        </SkeletonGrid>
+      )}
     </Grid>
   );
 };
