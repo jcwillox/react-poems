@@ -11,6 +11,7 @@ import { PoemType } from "../models/Poem";
 import Jdenticon from "./Jdenticon";
 import { CardActionArea, Divider } from "@material-ui/core";
 import { FavoriteBorder } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +48,7 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea component={Link} to={"/poems/" + poem.id}>
         <CardHeader
           title={poem.title}
           titleTypographyProps={{
