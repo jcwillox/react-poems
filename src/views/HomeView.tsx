@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Grid } from "@material-ui/core";
 import PoemCard from "../components/PoemCard";
 import PoemCardSkeleton from "../components/PoemCardSkeleton";
+import { usePoems } from "../config/hooks";
 import SkeletonGrid from "../components/SkeletonGrid";
-import { PoemType } from "../models/Poem";
 
 const HomeView = () => {
-  const [poems, setPoems] = useState<PoemType[]>([]);
-  const fetchPoems = async () => {
-    let result = await fetch("/api/poems", {
-      headers: { bob: "Bobalooba" }
-    }).then(res => res.json());
-    console.log("poems", result);
-    setPoems(result);
-  };
-
-  useEffect(() => {
-    fetchPoems();
-  }, []);
-
+  const poems = usePoems();
+  console.debug("reloading HomeView component", poems);
   return (
     <Grid
       container
