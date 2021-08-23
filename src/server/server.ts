@@ -15,7 +15,7 @@ app.use(cors());
 app.use("/api", poems);
 
 app.get("*", (req: Request, res: Response) => {
-  res.sendFile("build/index.html");
+  res.sendFile("build/index.html", { root: "." });
 });
 
 app.listen(PORT, () => {
