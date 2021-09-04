@@ -78,7 +78,7 @@ export default function SearchAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <div className={classes.menuButton}>
             {/* we are assuming that bob is the currently logged in user */}
