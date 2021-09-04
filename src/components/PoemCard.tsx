@@ -16,13 +16,30 @@ import Markdown from "markdown-to-jsx";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      maxWidth: 345
+      width: 345,
+      height: 241
     },
     title: {
       fontWeight: 300
     },
     header: {
       paddingBottom: 0
+    },
+    content: {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      height: "8.002rem",
+      "&::after": {
+        content: '""',
+        textAlign: "right",
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        width: "100%",
+        height: "2.5em",
+        background:
+          "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, .75) 100%)"
+      }
     },
     text: {
       fontWeight: 700
@@ -53,8 +70,8 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
   };
 
   const trimPoemText = (text: string) => {
-    if (text.length > 80) {
-      return text.substring(0, 80) + "…";
+    if (text.length > 180) {
+      return text.substring(0, 180) + "…";
     }
     return text;
   };
@@ -71,7 +88,7 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
           }}
           className={classes.header}
         />
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography
             variant="h5"
             color="textSecondary"
