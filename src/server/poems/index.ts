@@ -41,7 +41,9 @@ router.post("/poems", (req: Request, res: Response) => {
 });
 
 router.get("/poems/:id", (req: Request, res: Response) => {
-  return res.json(poemStore.get(req.params["id"]) || {});
+  let poem = poemStore.get(req.params["id"]);
+  if (poem) return res.json(poem);
+  return res.sendStatus(404);
 });
 
 export default router;
