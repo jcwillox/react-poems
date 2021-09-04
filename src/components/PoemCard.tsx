@@ -11,6 +11,7 @@ import { CardActionArea, Divider } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import LikesButton from "./LikesButton";
 import ShareButton from "./ShareButton";
+import Markdown from "markdown-to-jsx";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,12 +32,25 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     separator: {
       marginLeft: theme.spacing(1)
+    },
+    underline: {
+      textDecoration: "underline"
+    },
+    bold: {
+      fontWeight: 800
     }
   })
 );
 
 const PoemCard = ({ poem }: { poem: PoemType }) => {
   const classes = useStyles();
+
+  const markdownHeading = {
+    component: "span",
+    props: {
+      className: classes.bold
+    }
+  };
 
   const trimPoemText = (text: string) => {
     if (text.length > 80) {
@@ -61,8 +75,26 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
           <Typography
             variant="h5"
             color="textSecondary"
-            component="p"
+            component={Markdown}
             className={classes.text}
+            options={{
+              overrides: {
+                a: {
+                  component: "span",
+                  props: {
+                    className: classes.underline
+                  }
+                },
+                strong: {
+                  props: {
+                    className: classes.bold
+                  }
+                },
+                h1: markdownHeading,
+                h2: markdownHeading,
+                h3: markdownHeading
+              }
+            }}
           >
             {trimPoemText(poem.text)}
           </Typography>
