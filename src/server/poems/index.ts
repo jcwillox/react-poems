@@ -14,8 +14,22 @@ router.use((req: Request, res: Response, next: NextFunction) => {
 /* automatically decode requests with a json body */
 router.use(express.json());
 
-router.get("/ping", function (req: Request, res: Response) {
+router.get("/ping", (req: Request, res: Response) => {
   return res.send("pong");
+});
+
+router.post("/poems/upvote/:id", (req: Request, res: Response) => {
+  if (poemStore.upvote(req.params["id"])) {
+    return res.sendStatus(200);
+  }
+  return res.sendStatus(404);
+});
+
+router.post("/poems/downvote/:id", (req: Request, res: Response) => {
+  if (poemStore.downvote(req.params["id"])) {
+    return res.sendStatus(200);
+  }
+  return res.sendStatus(404);
 });
 
 router.get("/poems", (req: Request, res: Response) => {

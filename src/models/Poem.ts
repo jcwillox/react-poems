@@ -5,6 +5,7 @@ export interface PoemType {
   authorId: number;
   text: string;
   votes: number;
+  liked?: boolean;
 }
 
 export interface NewPoemType {

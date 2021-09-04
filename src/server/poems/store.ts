@@ -4,13 +4,21 @@ import { v4 as uuid4 } from "uuid";
 
 let poemData = { ...defaultPoems };
 
+// we use a simple set here to track likes as we are assuming
+// at this stage that there is only a single user.
+let likes = new Set<string>();
+
 export const poemStore = {
   /* returns a list of all poems */
   all: (): PoemType[] => {
-    return Object.values(poemData);
+    return Object.values(poemData).map(poem => {
+      poem.liked = likes.has(poem.id);
+      return poem;
+    });
   },
   /* return a specific poem based on its id */
   get: (id: string): PoemType | undefined => {
+    if (poemData[id]) poemData[id].liked = likes.has(id);
     return poemData[id];
   },
   /* adds a poem */
@@ -29,5 +37,21 @@ export const poemStore = {
   /* updates a poem */
   update: (poem: PoemType) => {
     poemData[poem.id] = poem;
+  },
+  upvote: (id: string) => {
+    if (poemData[id] && !likes.has(id)) {
+      likes.add(id);
+      poemData[id].votes++;
+      return true;
+    }
+    return false;
+  },
+  downvote: (id: string) => {
+    if (poemData[id] && likes.has(id)) {
+      likes.delete(id);
+      poemData[id].votes--;
+      return true;
+    }
+    return false;
   }
 };
