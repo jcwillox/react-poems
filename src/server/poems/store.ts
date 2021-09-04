@@ -29,6 +29,7 @@ export const poemStore = {
       id: id,
       votes: 0
     };
+    return poemData[id];
   },
   /* removes a poem */
   remove: (id: string) => {

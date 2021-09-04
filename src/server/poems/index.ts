@@ -37,8 +37,7 @@ router.get("/poems", (req: Request, res: Response) => {
 });
 
 router.post("/poems", (req: Request, res: Response) => {
-  poemStore.add(req.body);
-  return res.sendStatus(200);
+  return res.json(poemStore.add(req.body));
 });
 
 router.get("/poems/:id", (req: Request, res: Response) => {
