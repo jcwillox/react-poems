@@ -10,8 +10,8 @@ import ShareIcon from "@material-ui/icons/Share";
 import { PoemType } from "../models/Poem";
 import Jdenticon from "./Jdenticon";
 import { CardActionArea, Divider } from "@material-ui/core";
-import { FavoriteBorder } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import LikesButton from "./LikesButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,10 +74,7 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
         <Jdenticon value={poem.author} size={38} />
         <Typography className={classes.author}>{poem.author}</Typography>
         <div>
-          <IconButton aria-label="add to favorites">
-            <FavoriteBorder />
-          </IconButton>
-          {poem.votes}
+          <LikesButton poem={poem} />
           <span className={classes.separator}>·</span>
           <IconButton aria-label="share">
             <ShareIcon />
