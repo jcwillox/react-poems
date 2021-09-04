@@ -4,14 +4,13 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import ShareIcon from "@material-ui/icons/Share";
 import { PoemType } from "../models/Poem";
 import Jdenticon from "./Jdenticon";
 import { CardActionArea, Divider } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import LikesButton from "./LikesButton";
+import ShareButton from "./ShareButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,9 +75,7 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
         <div>
           <LikesButton poem={poem} />
           <span className={classes.separator}>·</span>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+          <ShareButton id={poem.id} />
         </div>
       </CardActions>
     </Card>
