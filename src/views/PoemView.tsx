@@ -6,6 +6,7 @@ import Markdown from "markdown-to-jsx";
 import { usePoem } from "../config/hooks";
 import LikesButton from "../components/LikesButton";
 import ShareButton from "../components/ShareButton";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +44,7 @@ const PoemView = () => {
             <Typography color="textPrimary">{poem?.author}</Typography>
           </Breadcrumbs>
           <Typography variant="h3" className={classes.title}>
-            {poem?.title}
+            {poem?.title || <Skeleton width={256} />}
           </Typography>
         </div>
         <div>
