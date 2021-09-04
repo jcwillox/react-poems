@@ -29,9 +29,9 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <SearchAppBar />
-        <Container maxWidth="md">
+        <Container maxWidth="md" disableGutters>
           <div className={classes.offset} />
-          <Box m={3}>
+          <Box m={{ xs: 1, md: 3 }}>
             <Switch>
               <Route exact path="/" component={HomeView} />
               <Route path="/poems/:id" component={PoemView} />
