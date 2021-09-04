@@ -25,7 +25,7 @@ export const PoemBackend = {
       return poemData;
     }
     console.debug("fetching poems from backend");
-    poemData = await PoemBackend.api("/poems");
+    poemData = await PoemBackend.apiJSON("/poems");
     return poemData;
   },
   /** return a specific poem based on its id */
@@ -34,11 +34,34 @@ export const PoemBackend = {
       return poemData.find(poem => poem.id === id);
     }
     console.debug("fetching poem from backend", id);
-    return await PoemBackend.api(`/poems/${id}`);
+    return PoemBackend.apiJSON(`/poems/${id}`);
+  },
+  /** Upvote a poem as the current user */
+  upvote: async (id: string): Promise<boolean> => {
+    let res = await PoemBackend.api(`/poems/upvote/${id}`, { method: "post" });
+    return res.status === 200;
+  },
+  /** Downvote a poem as the current user */
+  downvote: async (id: string): Promise<boolean> => {
+    let res = await PoemBackend.api(`/poems/downvote/${id}`, {
+      method: "post"
+    });
+    return res.status === 200;
+  },
+  /** make a request to the backend that returns a JSON response */
+  apiJSON: async (endpoint: string, data?: object): Promise<any> => {
+    let res = await PoemBackend.api(endpoint, { data });
+    console.log("ResStatus", res.status);
+    if (res.status !== 200) return false;
+    return res.json();
   },
   /** make a request to the backend api */
-  api: async (endpoint: string, data?: object) => {
+  api: async (
+    endpoint: string,
+    { data, method }: { data?: object; method?: string }
+  ) => {
     let options: RequestInit = {
+      method: method || "get",
       headers: { bob: "Bobalooba" }
     };
     if (data) {
@@ -51,6 +74,6 @@ export const PoemBackend = {
         }
       };
     }
-    return fetch("/api" + endpoint, options).then(res => res.json());
+    return fetch("/api" + endpoint, options);
   }
 };
