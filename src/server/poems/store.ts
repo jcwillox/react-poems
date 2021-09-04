@@ -40,19 +40,19 @@ export const poemStore = {
     poemData[poem.id] = poem;
   },
   upvote: (id: string) => {
+    if (!poemData[id]) return false;
     if (poemData[id] && !likes.has(id)) {
       likes.add(id);
       poemData[id].votes++;
-      return true;
     }
-    return false;
+    return true;
   },
   downvote: (id: string) => {
+    if (!poemData[id]) return false;
     if (poemData[id] && likes.has(id)) {
       likes.delete(id);
       poemData[id].votes--;
-      return true;
     }
-    return false;
+    return true;
   }
 };
