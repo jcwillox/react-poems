@@ -10,7 +10,7 @@ import {
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
-import Markdown from "markdown-to-jsx";
+import Markdown, { MarkdownToJSX } from "markdown-to-jsx";
 import { NewPoemType } from "../models/Poem";
 import { PoemBackend } from "../config/backend";
 import { useSnackbar } from "notistack";
@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: 3,
       height: 30,
       width: 30
+    },
+    pre: {
+      whiteSpace: "pre-wrap"
     }
   })
 );
@@ -76,6 +79,16 @@ const NewPoemView = () => {
     authorId: 0,
     text: ""
   });
+
+  const markdownOptions: MarkdownToJSX.Options = {
+    overrides: {
+      pre: {
+        props: {
+          className: classes.pre
+        }
+      }
+    }
+  };
 
   const handleChange = (key: string) => (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -165,7 +178,7 @@ const NewPoemView = () => {
           />
         ) : (
           <Typography variant="body1" component="div" className={classes.poem}>
-            <Markdown>{poem.text}</Markdown>
+            <Markdown options={markdownOptions}>{poem.text}</Markdown>
           </Typography>
         )}
       </Paper>

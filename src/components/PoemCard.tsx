@@ -11,7 +11,7 @@ import { CardActionArea, Divider } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import LikesButton from "./LikesButton";
 import ShareButton from "./ShareButton";
-import Markdown from "markdown-to-jsx";
+import Markdown, { MarkdownToJSX } from "markdown-to-jsx";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 300
     },
     header: {
+      display: "block",
       paddingBottom: 0
     },
     content: {
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "8.002rem",
       "&::after": {
         content: '""',
-        textAlign: "right",
         position: "absolute",
         bottom: 0,
         right: 0,
@@ -55,6 +55,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     bold: {
       fontWeight: 800
+    },
+    pre: {
+      whiteSpace: "pre-wrap",
+      margin: 0
+    },
+    actions: {
+      whiteSpace: "nowrap"
     }
   })
 );
@@ -62,18 +69,39 @@ const useStyles = makeStyles((theme: Theme) =>
 const PoemCard = ({ poem }: { poem: PoemType }) => {
   const classes = useStyles();
 
-  const markdownHeading = {
+  const markdownHeading: MarkdownToJSX.Override = {
     component: "span",
     props: {
       className: classes.bold
     }
   };
 
-  const trimPoemText = (text: string) => {
-    if (text.length > 180) {
-      return text.substring(0, 180) + "…";
+  const markdownOptions: MarkdownToJSX.Options = {
+    forceWrapper: true,
+    overrides: {
+      a: {
+        component: "span",
+        props: {
+          className: classes.underline
+        }
+      },
+      strong: {
+        props: {
+          className: classes.bold
+        }
+      },
+      p: {
+        component: "span"
+      },
+      pre: {
+        props: {
+          className: classes.pre
+        }
+      },
+      h1: markdownHeading,
+      h2: markdownHeading,
+      h3: markdownHeading
     }
-    return text;
   };
 
   return (
@@ -84,7 +112,8 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
           titleTypographyProps={{
             classes: {
               root: classes.title
-            }
+            },
+            noWrap: true
           }}
           className={classes.header}
         />
@@ -94,34 +123,19 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
             color="textSecondary"
             component={Markdown}
             className={classes.text}
-            options={{
-              overrides: {
-                a: {
-                  component: "span",
-                  props: {
-                    className: classes.underline
-                  }
-                },
-                strong: {
-                  props: {
-                    className: classes.bold
-                  }
-                },
-                h1: markdownHeading,
-                h2: markdownHeading,
-                h3: markdownHeading
-              }
-            }}
+            options={markdownOptions}
           >
-            {trimPoemText(poem.text)}
+            {poem.text}
           </Typography>
         </CardContent>
       </CardActionArea>
       <Divider />
       <CardActions>
         <Jdenticon value={poem.author} size={38} />
-        <Typography className={classes.author}>{poem.author}</Typography>
-        <div>
+        <Typography className={classes.author} noWrap>
+          {poem.author}
+        </Typography>
+        <div className={classes.actions}>
           <LikesButton poem={poem} />
           <span className={classes.separator}>·</span>
           <ShareButton id={poem.id} />
