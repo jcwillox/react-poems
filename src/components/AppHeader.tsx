@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function SearchAppBar() {
+export default function AppHeader() {
   const classes = useStyles();
 
   return (

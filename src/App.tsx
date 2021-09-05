@@ -6,7 +6,7 @@ import {
   makeStyles,
   Theme
 } from "@material-ui/core";
-import SearchAppBar from "./components/AppBar";
+import AppHeader from "./components/AppHeader";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomeView from "./views/HomeView";
 import PoemView from "./views/PoemView";
@@ -34,7 +34,7 @@ function App() {
     <React.Fragment>
       <CssBaseline />
       <BrowserRouter>
-        <SearchAppBar />
+        <AppHeader />
         <Container maxWidth="md" className={classes.container} disableGutters>
           <div className={classes.offset} />
           <Switch>
