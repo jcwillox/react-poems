@@ -2,29 +2,40 @@ import React, { useEffect, useRef } from "react";
 import jdenticon from "jdenticon/standalone";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
+type JdenticonProps = {
+  value: string;
+  size: number;
+  className?: string | undefined;
+};
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "inline-flex",
       borderRadius: 4,
-      padding: 2,
-      color: "white"
+      margin: 2
     }
   })
 );
 
-const Jdenticon = ({ value, size = 24 }: { value: string; size: number }) => {
+const Jdenticon = ({ value, size = 24, className }: JdenticonProps) => {
   const classes = useStyles();
   const icon = useRef(null);
+  const mixedClassName = className
+    ? `${className} ${classes.root}`
+    : classes.root;
 
   useEffect(() => {
     jdenticon.update(icon.current || "", value);
   }, [value]);
 
   return (
-    <div className={classes.root}>
-      <svg data-jdenticon-value={value} height={size} ref={icon} width={size} />
-    </div>
+    <svg
+      data-jdenticon-value={value}
+      height={size}
+      ref={icon}
+      width={size}
+      className={mixedClassName}
+    />
   );
 };
 
