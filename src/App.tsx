@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Box,
   Container,
   createStyles,
   CssBaseline,
@@ -15,8 +14,14 @@ import PoemView from "./views/PoemView";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     offset: theme.mixins.toolbar,
-    title: {
-      flexGrow: 1
+    container: {
+      height: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      padding: theme.spacing(1),
+      [theme.breakpoints.up("md")]: {
+        padding: theme.spacing(3)
+      }
     }
   })
 );
@@ -29,14 +34,12 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <SearchAppBar />
-        <Container maxWidth="md" disableGutters>
+        <Container maxWidth="md" className={classes.container} disableGutters>
           <div className={classes.offset} />
-          <Box m={{ xs: 1, md: 3 }}>
-            <Switch>
-              <Route exact path="/" component={HomeView} />
-              <Route path="/poems/:id" component={PoemView} />
-            </Switch>
-          </Box>
+          <Switch>
+            <Route exact path="/" component={HomeView} />
+            <Route path="/poems/:id" component={PoemView} />
+          </Switch>
         </Container>
       </BrowserRouter>
     </React.Fragment>
