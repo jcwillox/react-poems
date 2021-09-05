@@ -4,6 +4,7 @@ import { Done as DoneIcon } from "@material-ui/icons";
 import { IconButton, Tooltip } from "@material-ui/core";
 import ShareIcon from "@material-ui/icons/Share";
 import { useDebouncedCallback } from "use-debounce";
+import clipboardCopy from "clipboard-copy";
 
 type ShareButtonProps = {
   id?: string;
@@ -26,9 +27,7 @@ const ShareButton = ({ id }: ShareButtonProps) => {
 
   const handleClick = async () => {
     if (!id) return;
-    await navigator.clipboard.writeText(
-      window.location.origin + "/poems/" + id
-    );
+    await clipboardCopy(window.location.origin + "/poems/" + id);
     setClicked(true);
     resetState();
   };
