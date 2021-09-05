@@ -97,7 +97,7 @@ const NewPoemView = () => {
         enqueueSnackbar("Saved!", {
           variant: "success"
         });
-        history.replace("/");
+        history.replace(`/poems/${res.id}`);
       })
       .catch(err => {
         console.log("error saving poem", err);
