@@ -1,4 +1,4 @@
-import { PoemType } from "../models/Poem";
+import { NewPoemType, PoemType } from "../models/Poem";
 
 let poemData: PoemType[] = [];
 
@@ -45,7 +45,14 @@ export const PoemBackend = {
     return PoemBackend.api(`/poems/downvote/${id}`, {
       method: "post"
     });
-    return res.status === 200;
+  },
+  /** Save a new poem */
+  add: async (poem: NewPoemType): Promise<PoemType> => {
+    let newPoem = await PoemBackend.apiJSON(`/poems`, poem);
+    if (PoemBackend.cache.isValid()) {
+      poemData.push(newPoem);
+    }
+    return newPoem;
   },
   /** make a request to the backend that returns a JSON response */
   apiJSON: (endpoint: string, data?: object): Promise<any> => {
