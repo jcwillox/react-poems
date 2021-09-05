@@ -10,6 +10,7 @@ import SearchAppBar from "./components/AppBar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomeView from "./views/HomeView";
 import PoemView from "./views/PoemView";
+import NewPoemView from "./views/NewPoemView";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,6 +40,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomeView} />
             <Route path="/poems/:id" component={PoemView} />
+            <Route path="/new/poem" component={NewPoemView} />
           </Switch>
         </Container>
       </BrowserRouter>
