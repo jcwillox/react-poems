@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Jdenticon from "./Jdenticon";
-import { IconButton, Link } from "@material-ui/core";
+import { IconButton, Link, Tooltip } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 
@@ -47,11 +47,13 @@ export default function SearchAppBar() {
             </Typography>
           </Link>
           <span className={classes.spacer} />
-          <Link component={RouterLink} to="/new/poem" color="inherit">
-            <IconButton color="inherit">
-              <LibraryAddIcon />
-            </IconButton>
-          </Link>
+          <Tooltip title="New Poem">
+            <Link component={RouterLink} to="/new/poem" color="inherit">
+              <IconButton color="inherit">
+                <LibraryAddIcon />
+              </IconButton>
+            </Link>
+          </Tooltip>
         </Toolbar>
       </AppBar>
     </div>
