@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     ghost: {
       height: 128,
-      fill: theme.palette.grey.A400,
+      fill: theme.palette.grey.A700,
       width: "auto"
     },
     error: {
@@ -42,7 +42,7 @@ const ErrorFallbackView = ({ error }: ErrorFallbackViewProps) => {
         {error.message}
       </Typography>
       <Button
-        variant="outlined"
+        variant="contained"
         color="primary"
         className={classes.button}
         onClick={handleRefresh}

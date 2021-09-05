@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: 400,
       border: "none",
       outline: "none",
+      background: "transparent",
       color: theme.palette.text.primary,
       padding: theme.spacing(2),
       overflowY: "auto"

@@ -37,8 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
         right: 0,
         width: "100%",
         height: "1.5em",
-        background:
-          "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, .75) 100%)"
+        background: `linear-gradient(to bottom, rgba(255, 255, 255, 0), ${theme.palette.background.default}c8 100%)`
       }
     },
     text: {

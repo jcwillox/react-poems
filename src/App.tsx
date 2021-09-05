@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   createStyles,
+  createTheme,
   CssBaseline,
   makeStyles,
-  Theme
+  Theme,
+  ThemeProvider
 } from "@material-ui/core";
 import AppHeader from "./components/AppHeader";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomeView from "./views/HomeView";
 import PoemView from "./views/PoemView";
 import NewPoemView from "./views/NewPoemView";
+import { SnackbarProvider } from "notistack";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,22 +32,35 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function App() {
   const classes = useStyles();
+  const [darkMode, setDarkMode] = useState(false);
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          type: darkMode ? "dark" : "light"
+        }
+      }),
+    [darkMode]
+  );
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <BrowserRouter>
-        <AppHeader />
-        <Container maxWidth="md" className={classes.container} disableGutters>
-          <div className={classes.offset} />
-          <Switch>
-            <Route exact path="/" component={HomeView} />
-            <Route path="/poems/:id" component={PoemView} />
-            <Route path="/new/poem" component={NewPoemView} />
-          </Switch>
-        </Container>
-      </BrowserRouter>
-    </React.Fragment>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider disableWindowBlurListener>
+        <CssBaseline />
+        <BrowserRouter>
+          <AppHeader onThemeChange={newDarkMode => setDarkMode(newDarkMode)} />
+          <Container maxWidth="md" className={classes.container} disableGutters>
+            <div className={classes.offset} />
+            <Switch>
+              <Route exact path="/" component={HomeView} />
+              <Route path="/poems/:id" component={PoemView} />
+              <Route path="/new/poem" component={NewPoemView} />
+            </Switch>
+          </Container>
+        </BrowserRouter>
+      </SnackbarProvider>
+    </ThemeProvider>
   );
 }
 

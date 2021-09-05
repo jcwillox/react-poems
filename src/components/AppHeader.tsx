@@ -7,6 +7,11 @@ import Jdenticon from "./Jdenticon";
 import { IconButton, Link, Tooltip } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
+import DarkModeToggle from "./DarkModeToggle";
+
+type AppHeaderProps = {
+  onThemeChange: (darkMode: boolean) => void;
+};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function AppHeader() {
+export default function AppHeader({ onThemeChange }: AppHeaderProps) {
   const classes = useStyles();
 
   return (
@@ -47,6 +52,7 @@ export default function AppHeader() {
             </Typography>
           </Link>
           <span className={classes.spacer} />
+          <DarkModeToggle onThemeChange={onThemeChange} />
           <Tooltip title="New Poem">
             <Link component={RouterLink} to="/new/poem" color="inherit">
               <IconButton color="inherit">
