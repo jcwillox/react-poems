@@ -31,10 +31,11 @@ const Jdenticon = ({ value, size = 24, className }: JdenticonProps) => {
   return (
     <svg
       data-jdenticon-value={value}
-      height={size}
-      ref={icon}
-      width={size}
       className={mixedClassName}
+      style={{ minWidth: size, minHeight: size }}
+      height={size}
+      width={size}
+      ref={icon}
     />
   );
 };
