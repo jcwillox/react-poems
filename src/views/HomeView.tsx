@@ -19,11 +19,13 @@ const HomeView = () => {
       spacing={3}
     >
       {poems.length ? (
-        poems.map(poem => (
-          <Grid item key={poem.id}>
-            <PoemCard poem={poem} />
-          </Grid>
-        ))
+        poems
+          .sort((a, b) => b.votes - a.votes)
+          .map(poem => (
+            <Grid item key={poem.id}>
+              <PoemCard poem={poem} />
+            </Grid>
+          ))
       ) : (
         <SkeletonGrid count={4}>
           <PoemCardSkeleton />
