@@ -37,29 +37,25 @@ export const PoemBackend = {
     return PoemBackend.apiJSON(`/poems/${id}`);
   },
   /** Upvote a poem as the current user */
-  upvote: async (id: string): Promise<boolean> => {
-    let res = await PoemBackend.api(`/poems/upvote/${id}`, { method: "post" });
-    return res.status === 200;
+  upvote: async (id: string): Promise<Response> => {
+    return PoemBackend.api(`/poems/upvote/${id}`, { method: "post" });
   },
   /** Downvote a poem as the current user */
-  downvote: async (id: string): Promise<boolean> => {
-    let res = await PoemBackend.api(`/poems/downvote/${id}`, {
+  downvote: async (id: string): Promise<Response> => {
+    return PoemBackend.api(`/poems/downvote/${id}`, {
       method: "post"
     });
     return res.status === 200;
   },
   /** make a request to the backend that returns a JSON response */
-  apiJSON: async (endpoint: string, data?: object): Promise<any> => {
-    let res = await PoemBackend.api(endpoint, { data });
-    console.log("ResStatus", res.status);
-    if (res.status !== 200) return false;
-    return res.json();
+  apiJSON: (endpoint: string, data?: object): Promise<any> => {
+    return PoemBackend.api(endpoint, { data }).then(res => res.json());
   },
   /** make a request to the backend api */
   api: async (
     endpoint: string,
     { data, method }: { data?: object; method?: string }
-  ) => {
+  ): Promise<Response> => {
     let options: RequestInit = {
       method: method || "get",
       headers: { bob: "Bobalooba" }
@@ -74,6 +70,10 @@ export const PoemBackend = {
         }
       };
     }
-    return fetch("/api" + endpoint, options);
+    let res = await fetch("/api" + endpoint, options);
+    if (!res.ok) {
+      throw new Error(`(${res.status}) ${res.statusText}`);
+    }
+    return res;
   }
 };
