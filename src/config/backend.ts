@@ -31,7 +31,8 @@ export const PoemBackend = {
   /** return a specific poem based on its id */
   get: async (id: string): Promise<PoemType | undefined> => {
     if (PoemBackend.cache.isValid()) {
-      return poemData.find(poem => poem.id === id);
+      let poem = poemData.find(poem => poem.id === id);
+      if (poem !== undefined) return poem;
     }
     console.debug("fetching poem from backend", id);
     return PoemBackend.apiJSON(`/poems/${id}`);
