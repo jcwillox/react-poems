@@ -7,6 +7,8 @@ import { usePoem } from "../config/hooks";
 import LikesButton from "../components/LikesButton";
 import ShareButton from "../components/ShareButton";
 import { Skeleton } from "@material-ui/lab";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorFallbackView from "./ErrorFallbackView";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,4 +67,6 @@ const PoemView = () => {
   );
 };
 
-export default PoemView;
+export default withErrorBoundary(PoemView, {
+  FallbackComponent: ErrorFallbackView
+});

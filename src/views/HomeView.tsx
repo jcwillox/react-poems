@@ -4,6 +4,8 @@ import PoemCard from "../components/PoemCard";
 import PoemCardSkeleton from "../components/PoemCardSkeleton";
 import { usePoems } from "../config/hooks";
 import SkeletonGrid from "../components/SkeletonGrid";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorFallbackView from "./ErrorFallbackView";
 
 const HomeView = () => {
   const poems = usePoems();
@@ -31,4 +33,6 @@ const HomeView = () => {
   );
 };
 
-export default HomeView;
+export default withErrorBoundary(HomeView, {
+  FallbackComponent: ErrorFallbackView
+});

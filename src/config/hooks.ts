@@ -7,9 +7,16 @@ export function usePoem(id: string): PoemType | undefined {
   const [poem, setPoem] = useState(defaultPoem);
 
   useEffect(() => {
-    PoemBackend.get(id).then(poem => {
-      setPoem(poem);
-    });
+    PoemBackend.get(id)
+      .then(poem => {
+        setPoem(poem);
+      })
+      .catch(err => {
+        // forces react to trigger error boundary
+        setPoem(() => {
+          throw err;
+        });
+      });
   }, [id]);
 
   return poem;
@@ -20,9 +27,15 @@ export function usePoems(): PoemType[] {
   const [poems, setPoems] = useState(data);
 
   useEffect(() => {
-    PoemBackend.all().then(poems => {
-      setPoems(poems);
-    });
+    PoemBackend.all()
+      .then(poems => {
+        setPoems(poems);
+      })
+      .catch(err => {
+        setPoems(() => {
+          throw err;
+        });
+      });
   });
 
   return poems;
