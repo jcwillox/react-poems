@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100vh",
       display: "flex",
       flexDirection: "column",
-      padding: theme.spacing(1),
+      padding: theme.spacing(2),
       [theme.breakpoints.up("md")]: {
         padding: theme.spacing(3)
       }

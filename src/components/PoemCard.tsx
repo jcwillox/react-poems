@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
         bottom: 0,
         right: 0,
         width: "100%",
-        height: "2.5em",
+        height: "1.5em",
         background:
           "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, .75) 100%)"
       }
@@ -119,7 +119,7 @@ const PoemCard = ({ poem }: { poem: PoemType }) => {
         />
         <CardContent className={classes.content}>
           <Typography
-            variant="h5"
+            variant="body1"
             color="textSecondary"
             component={Markdown}
             className={classes.text}

@@ -18,11 +18,13 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(1),
       [theme.breakpoints.up("md")]: {
         marginBottom: theme.spacing(3)
-      }
+      },
+      overflowX: "auto"
     },
     title: {
       fontWeight: 300,
-      textAlign: "center"
+      textAlign: "center",
+      marginTop: theme.spacing(1)
     },
     container: {
       display: "flex",
