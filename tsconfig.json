@@ -11,11 +11,16 @@
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "noImplicitAny": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
-  "exclude": ["./src/server"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/server"
+  ]
 }

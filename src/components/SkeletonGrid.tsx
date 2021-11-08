@@ -7,7 +7,7 @@ type SkeletonGridProps = {
 };
 
 const SkeletonGrid = ({ count, children }: SkeletonGridProps) => {
-  let items = [];
+  let items: ReactNode[] = [];
   for (let i = 0; i < count; i++) {
     items.push(
       <Grid item key={i}>
