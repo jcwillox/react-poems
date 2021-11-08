@@ -1,5 +1,5 @@
 import Readline from "readline";
-import { defaultPoems } from "../server/poems/data";
+import { defaultPoems } from "../api/poems/data";
 import { v4 as uuid4 } from "uuid";
 import { PoemType } from "../models/Poem";
 
