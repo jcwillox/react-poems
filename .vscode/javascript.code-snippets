@@ -1,0 +1,81 @@
+{
+  "React TS component": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "rtsc",
+    "body": [
+      "import React from \"react\";",
+      "",
+      "const $TM_FILENAME_BASE = () => {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "   );",
+      "};",
+      "",
+      "export default $TM_FILENAME_BASE;",
+      ""
+    ],
+    "description": "Creates a stateless React Typescript component"
+  },
+  "React TS component with Props": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "rtscp",
+    "body": [
+      "import React from \"react\";",
+      "",
+      "type ${TM_FILENAME_BASE}Props = {",
+      "  $0",
+      "};",
+      "",
+      "const $TM_FILENAME_BASE = (props: ${TM_FILENAME_BASE}Props) => {",
+      "  return (",
+      "    <div>",
+      "      $1",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default $TM_FILENAME_BASE;",
+      ""
+    ],
+    "description": "Creates a stateless React Typescript component with Props"
+  },
+  "Test for a React component": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "rtst",
+    "body": [
+      "import React from \"react\";",
+      "import { render, screen } from \"@testing-library/react\";",
+      "import ${TM_FILENAME/^([^.]+).+$/$1/} from \"./${TM_FILENAME/^([^.]+).+$/$1/}\";",
+      "",
+      "describe(\"${TM_FILENAME/^([^.]+).+$/$1/} component\", () => {",
+      "  test(\"${1:renders content}\", () => {",
+      "    render(<${TM_FILENAME/^([^.]+).+$/$1/} />);",
+      "    $0",
+      "  });",
+      "});",
+      ""
+    ],
+    "description": "Creates a test for a React component"
+  },
+  "React TS @mui styled component": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "rtsmsc",
+    "body": ["const $1 = styled(\"div\")(", "  ({ theme }) => ``", ");"],
+    "description": "Creates a React Typescript @mui styled component"
+  },
+  "React TS props block": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "rtsp",
+    "body": [
+      "type ${TM_FILENAME_BASE}Props = {",
+      "  $0",
+      "};",
+      "",
+      "const $TM_FILENAME_BASE = (props: ${TM_FILENAME_BASE}Props) => {",
+      ""
+    ],
+    "description": "Creates a React TS props block"
+  }
+}
