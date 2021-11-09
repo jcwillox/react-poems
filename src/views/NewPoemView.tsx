@@ -91,12 +91,12 @@ const NewPoemView = () => {
     }
   };
 
-  const handleChange = (key: string) => (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setPoem({ ...poem, [key]: event.target.value });
-    console.log("Poem", poem);
-  };
+  const handleChange =
+    (key: string) =>
+    (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      setPoem({ ...poem, [key]: event.target.value });
+      console.log("Poem", poem);
+    };
 
   const changeEditMode = () => {
     setEditMode(!editMode);

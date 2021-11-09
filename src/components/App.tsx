@@ -8,11 +8,11 @@ import {
   Theme,
   ThemeProvider
 } from "@material-ui/core";
-import AppHeader from "./components/AppHeader";
+import AppHeader from "./AppHeader";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomeView from "./views/HomeView";
-import PoemView from "./views/PoemView";
-import NewPoemView from "./views/NewPoemView";
+import HomeView from "../views/HomeView";
+import PoemView from "../views/PoemView";
+import NewPoemView from "../views/NewPoemView";
 import { SnackbarProvider } from "notistack";
 
 const useStyles = makeStyles((theme: Theme) =>
