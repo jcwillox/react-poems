@@ -9,10 +9,6 @@ import { Link as RouterLink } from "react-router-dom";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DarkModeToggle from "./DarkModeToggle";
 
-type AppHeaderProps = {
-  onThemeChange: (darkMode: boolean) => void;
-};
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -33,9 +29,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function AppHeader({ onThemeChange }: AppHeaderProps) {
+const AppHeader = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -52,7 +47,7 @@ export default function AppHeader({ onThemeChange }: AppHeaderProps) {
             </Typography>
           </Link>
           <span className={classes.spacer} />
-          <DarkModeToggle onThemeChange={onThemeChange} />
+          <DarkModeToggle />
           <Tooltip title="New Poem">
             <Link component={RouterLink} to="/new/poem" color="inherit">
               <IconButton color="inherit">
@@ -64,4 +59,6 @@ export default function AppHeader({ onThemeChange }: AppHeaderProps) {
       </AppBar>
     </div>
   );
-}
+};
+
+export default AppHeader;

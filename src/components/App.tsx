@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   createStyles,
-  createTheme,
   CssBaseline,
   makeStyles,
-  Theme,
-  ThemeProvider
+  Theme
 } from "@material-ui/core";
 import AppHeader from "./AppHeader";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -14,6 +12,7 @@ import HomeView from "../views/HomeView";
 import PoemView from "../views/PoemView";
 import NewPoemView from "../views/NewPoemView";
 import { SnackbarProvider } from "notistack";
+import ThemeModeProvider from "./ThemeModeContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,24 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function App() {
   const classes = useStyles();
-  const [darkMode, setDarkMode] = useState(false);
-
-  const theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          type: darkMode ? "dark" : "light"
-        }
-      }),
-    [darkMode]
-  );
-
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeModeProvider>
       <SnackbarProvider disableWindowBlurListener>
         <CssBaseline />
         <BrowserRouter>
-          <AppHeader onThemeChange={newDarkMode => setDarkMode(newDarkMode)} />
+          <AppHeader />
           <Container maxWidth="md" className={classes.container} disableGutters>
             <div className={classes.offset} />
             <Switch>
@@ -60,7 +47,7 @@ function App() {
           </Container>
         </BrowserRouter>
       </SnackbarProvider>
-    </ThemeProvider>
+    </ThemeModeProvider>
   );
 }
 
